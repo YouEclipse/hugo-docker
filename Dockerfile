@@ -44,7 +44,6 @@ COPY --from=0 /tmp/caddy /usr/bin/caddy
 COPY --from=0 /tmp/blog/public ./public/
 
 ADD Caddyfile .
-ADD run.sh .
 
 RUN chmod +x /usr/bin/caddy
 
