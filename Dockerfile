@@ -23,26 +23,21 @@ ENV GIT_REPOSITORY_NAME=blog
 
 RUN apk --no-cache add git
 
-FROM alpine:latest as runner
-
-
-
-COPY --from=0 /tmp/caddy /usr/bin/caddy
-
-COPY --from=0 /tmp/hugo /usr/bin/bin
-
-
-
-
-WORKDIR /tmp
-
-COPY --from=0 /tmp/public ./public/
-
-
 RUN git clone ${GIT_REPOSITORY} \
     && cd /tmp/${GIT_REPOSITORY_NAME}
 
 
 RUN hugo -D
+
+FROM alpine:latest as runner
+
+WORKDIR /tmp
+
+COPY --from=0 /tmp/caddy /usr/bin/caddy
+
+COPY --from=0 /tmp/hugo /usr/bin/bin
+
+COPY --from=0 /tmp/blog/public ./public/
+
 
 ENTRYPOINT ["caddy","run","--conf","./Caddyfile","--adapter" ]
