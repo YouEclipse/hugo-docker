@@ -1,2 +1,2 @@
 # hugo-docker
-A Docker image for site built by hugo
+A Docker image for websites built by hugo
