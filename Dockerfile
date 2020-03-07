@@ -2,6 +2,7 @@ FROM alpine:latest AS builder
 
 LABEL maintainer=chuiyouwu@gmail.com
 
+ENV PATH "/usr/local/bin:${PATH}"
 ENV HUGO_VERSION=0.66.0
 ENV HUGO_EXTENDED=_extended
 
