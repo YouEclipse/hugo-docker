@@ -48,6 +48,7 @@ ADD run.sh .
 
 RUN chmod +x /usr/bin/caddy
 
-ENTRYPOINT ["run.sh" ]
+CMD caddy run -config /tmp/Caddyfile --adapter caddyfile
+ 
 
 EXPOSE 80
