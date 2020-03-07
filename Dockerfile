@@ -2,16 +2,18 @@ FROM alpine:latest AS builder
 
 LABEL maintainer=chuiyouwu@gmail.com
 
-ENV PATH "/usr/local/bin:${PATH}"
+
 ENV HUGO_VERSION=0.66.0
 ENV HUGO_EXTENDED=_extended
 
 WORKDIR /tmp
 
+RUN apk add --update wget ca-certificates libstdc++
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp
 
-RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /usr/local/bin 
+RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp \
+    && mv /tmp/hugo /usr/local/bin/
 
 #ENV CADDY_VERSION =v2.0.0-beta.15
 
@@ -30,10 +32,8 @@ RUN git clone ${GIT_REPOSITORY} \
 
 RUN hugo -D
 
-
 FROM alpine:latest as runner
 
-EXPOSE 80
 
 WORKDIR /tmp
 
@@ -43,3 +43,5 @@ COPY --from=0 /tmp/blog/public ./public/
 
 
 ENTRYPOINT ["caddy","run","--conf","./Caddyfile","--adapter" ]
+
+EXPOSE 80
