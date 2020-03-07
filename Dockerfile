@@ -28,15 +28,14 @@ RUN git clone ${GIT_REPOSITORY} \
     && cd /tmp/${GIT_REPOSITORY_NAME}
 
 
-RUN hugo -D
+RUN ./hugo -D
+
 
 FROM alpine:latest as runner
 
 WORKDIR /tmp
 
 COPY --from=0 /tmp/caddy /usr/bin/caddy
-
-COPY --from=0 /tmp/hugo /usr/bin/bin
 
 COPY --from=0 /tmp/blog/public ./public/
 
