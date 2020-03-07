@@ -10,7 +10,7 @@ WORKDIR /tmp
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp
 
-RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp 
+RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /usr/local/bin 
 
 #ENV CADDY_VERSION =v2.0.0-beta.15
 
@@ -27,11 +27,12 @@ RUN apk --no-cache add git
 RUN git clone ${GIT_REPOSITORY} \
     && cd /tmp/${GIT_REPOSITORY_NAME}
 
-
 RUN ./hugo -D
 
 
 FROM alpine:latest as runner
+
+EXPOSE 80
 
 WORKDIR /tmp
 
