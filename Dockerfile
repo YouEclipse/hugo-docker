@@ -15,7 +15,7 @@ RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp
 
 ADD https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.15/caddy2_beta15_linux_arm64 /tmp 
 
-RUN   mv /tmp/caddy2_beta15_linux_arm64 caddy
+RUN   mv /tmp/caddy2_beta15_linux_arm64 /tmp/caddy
 
 
 ENV GIT_REPOSITORY=https://github.com/YouEclipse/blog.git
