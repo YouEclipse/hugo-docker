@@ -28,7 +28,7 @@ RUN apk --no-cache add git
 RUN git clone ${GIT_REPOSITORY} \
     && cd /tmp/${GIT_REPOSITORY_NAME}
 
-RUN ./hugo -D
+RUN hugo -D
 
 
 FROM alpine:latest as runner
