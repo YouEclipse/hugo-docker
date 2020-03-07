@@ -5,6 +5,7 @@ LABEL maintainer=chuiyouwu@gmail.com
 ENV HUGO_VERSION=0.66.0
 ENV HUGO_EXTENDED=_extended
 
+WORKDIR /tmp
 
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp
