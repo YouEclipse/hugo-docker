@@ -1,5 +1,5 @@
 :80 {
-    encode zstd gzip
-    root ./public
+    root /tmp/public
+    gzip
 }
 
