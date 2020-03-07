@@ -3,9 +3,3 @@
     root ./public
 }
 
-errors	/var/log/caddy/error.log {
-    404         ./public/404.html
-    rotate_age	7
-    rotate_keep	2
-    rotate_compress
-}
