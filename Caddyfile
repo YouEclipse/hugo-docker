@@ -1,5 +1,11 @@
 :80 {
     encode zstd gzip
     root ./public
-    file_server browse
+}
+
+errors	/var/log/caddy/error.log {
+    404         ./public/404.html
+    rotate_age	7
+    rotate_keep	2
+    rotate_compress
 }
