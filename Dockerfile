@@ -9,13 +9,7 @@ ENV HUGO_EXTENDED=_extended
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp
 
-RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp \
-    && mkdir -p /usr/local/sbin \
-    && mv /tmp/hugo /usr/local/sbin/hugo \
-    && rm -rf /tmp/${HUGO_ID}_linux_amd64 \
-    && rm -rf /tmp/${HUGO_ID}_Linux-64bit.tar.gz \
-    && rm -rf /tmp/LICENSE.md \
-    && rm -rf /tmp/README.md
+RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp 
 
 #ENV CADDY_VERSION =v2.0.0-beta.15
 
