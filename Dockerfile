@@ -13,7 +13,7 @@ RUN apk add --update git asciidoctor libc6-compat libstdc++ \
 
 ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz /tmp
 
-RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C /tmp  /usr/local/bin/
+RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C   /usr/local/bin/
 
 #ENV CADDY_VERSION =v2.0.0-beta.15
 
