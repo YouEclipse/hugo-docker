@@ -15,7 +15,7 @@ ADD https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo${HU
 
 RUN tar -xf /tmp/hugo${HUGO_EXTENDED}_${HUGO_VERSION}_Linux-64bit.tar.gz -C   /usr/local/bin/
 
-#ENV CADDY_VERSION =v2.0.0-beta.15
+ENV CADDY_VERSION =v2.0.0-beta.15
 
 ADD https://github.com/caddyserver/caddy/releases/download/v2.0.0-beta.15/caddy2_beta15_linux_amd64 /tmp 
 
@@ -25,14 +25,28 @@ RUN   mv /tmp/caddy2_beta15_linux_amd64 /tmp/caddy
 ENV GIT_REPOSITORY=https://github.com/YouEclipse/blog.git
 ENV GIT_REPOSITORY_NAME=blog
 
+ENV THEME_GIT_REPOSITORY=https://github.com/mengzhuo/hugo-theme-goblog.git
+ENV THEME_NAME=hugo-theme-goblog
+
 RUN apk --no-cache add git
 
 WORKDIR /tmp
 
 RUN git clone ${GIT_REPOSITORY}  
 
+
 RUN cd ${GIT_REPOSITORY_NAME} \
-    && hugo -D
+    && mkdir themes \
+    && cd /tmp/blog/themes \
+    && git clone ${THEME_GIT_REPOSITORY}
+
+WORKDIR /tmp/blog
+
+RUN sh -c 'sed -i "s/theme = \".*\"/theme = \"$THEME_NAME\"/" config.toml'
+
+RUN cat config.toml
+
+RUN hugo -D
 
 FROM alpine:latest as runner
 
@@ -40,6 +54,8 @@ FROM alpine:latest as runner
 WORKDIR /tmp
 
 COPY --from=0 /tmp/caddy /usr/bin/caddy
+
+COPY --from=0 /tmp/blog ./blog
 
 COPY --from=0 /tmp/blog/public ./public/
 
