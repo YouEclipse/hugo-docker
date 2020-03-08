@@ -25,8 +25,8 @@ RUN   mv /tmp/caddy2_beta15_linux_amd64 /tmp/caddy
 ENV GIT_REPOSITORY=https://github.com/YouEclipse/blog.git
 ENV GIT_REPOSITORY_NAME=blog
 
-ENV THEME_GIT_REPOSITORY=https://github.com/mengzhuo/hugo-theme-goblog.git
-ENV THEME_NAME=hugo-theme-goblog
+ENV THEME_GIT_REPOSITORY=https://github.com/dillonzq/LoveIt.git
+ENV THEME_NAME=LoveIt
 
 RUN apk --no-cache add git
 
