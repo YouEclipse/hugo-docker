@@ -55,8 +55,6 @@ WORKDIR /tmp
 
 COPY --from=0 /tmp/caddy /usr/bin/caddy
 
-COPY --from=0 /tmp/blog ./blog
-
 COPY --from=0 /tmp/blog/public ./public/
 
 ADD Caddyfile .
