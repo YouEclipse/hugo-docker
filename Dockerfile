@@ -45,7 +45,7 @@ WORKDIR /tmp/blog
 RUN sh -c 'sed -i "s/theme = \".*\"/theme = \"$THEME_NAME\"/" config.toml'
 
 
-RUN hugo -D
+RUN hugo 
 
 FROM alpine:latest as runner
 
